@@ -133,31 +133,31 @@
                 if (zFinal <= z0) {
                     throw new Error("Ketinggian akhir harus lebih besar dari ketinggian awal.");
                 }
-        // Constants
-            const lapseRate = 0.0065; // Lapse rate (K/m)
-            const a = 1.2;           // Additional parameter (K)
+                // Constants
+                const lapseRate = 0.0065; // Lapse rate (K/m)
+                const a = 1.2;           // Additional parameter (K)
 
-        // Differential equation dT/dz = -Γ * (1 + a/T)
-        function f(T, z) {
-            return -lapseRate * (1 + a / T);
+                // Differential equation dT/dz = -Γ * (1 + a/T)
+                function f(T, z) {
+                    return -lapseRate * (1 + a / T);
         }
 
-        // Runge-Kutta 4th Order
-        function rungeKutta(T0, dz, zMax) {
-            let results = [];
-            let T = T0;
-            let z = 0;
+               // Runge-Kutta 4th Order
+                function rungeKutta(T0, dz, zMax) {
+                let results = [];
+                let T = T0;
+                let z = 0;
 
-            while (z <= zMax) {
-                results.push({ z: z, T: T });
+                while (z <= zMax) {
+                    results.push({ z: z, T: T });
 
-                let k1 = f(T, z);
-                let k2 = f(T + 0.5 * dz * k1, z + 0.5 * dz);
-                let k3 = f(T + 0.5 * dz * k2, z + 0.5 * dz);
-                let k4 = f(T + dz * k3, z + dz);
+                    let k1 = f(T, z);
+                    let k2 = f(T + 0.5 * dz * k1, z + 0.5 * dz);
+                    let k3 = f(T + 0.5 * dz * k2, z + 0.5 * dz);
+                    let k4 = f(T + dz * k3, z + dz);
 
-                T += (dz / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
-                z += dz;
+                    T += (dz / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
+                    z += dz;
 
                     // Hitung laplace rate dan stabilitas
                     const laplaceRate = gradDryAdiabatic - gradEnv;
