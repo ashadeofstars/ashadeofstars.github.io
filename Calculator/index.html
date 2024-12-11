@@ -133,25 +133,31 @@
                 if (zFinal <= z0) {
                     throw new Error("Ketinggian akhir harus lebih besar dari ketinggian awal.");
                 }
+        // Constants
+            const lapseRate = 0.0065; // Lapse rate (K/m)
+            const a = 1.2;           // Additional parameter (K)
 
-                // Gradien suhu adiabatik kering (Gamma_d)
-                const gradDryAdiabatic = 1 / 100; // °C/m
+        // Differential equation dT/dz = -Γ * (1 + a/T)
+        function f(T, z) {
+            return -lapseRate * (1 + a / T);
+        }
 
-                // Metode Runge-Kutta ke-4
-                let z = z0;
-                let T = T0;
-                const results = [];
-                while (z <= zFinal) {
-                    // Gradien suhu lingkungan (contoh: model sederhana)
-                    const gradEnv = gradDryAdiabatic * (1 - Math.random() * 0.2); // Simulasi variasi
-                    const k1 = -gradEnv * h;
-                    const k2 = -gradEnv * h;
-                    const k3 = -gradEnv * h;
-                    const k4 = -gradEnv * h;
+        // Runge-Kutta 4th Order
+        function rungeKutta(T0, dz, zMax) {
+            let results = [];
+            let T = T0;
+            let z = 0;
 
-                    // Update suhu
-                    T += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
-                    z += h;
+            while (z <= zMax) {
+                results.push({ z: z, T: T });
+
+                let k1 = f(T, z);
+                let k2 = f(T + 0.5 * dz * k1, z + 0.5 * dz);
+                let k3 = f(T + 0.5 * dz * k2, z + 0.5 * dz);
+                let k4 = f(T + dz * k3, z + dz);
+
+                T += (dz / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
+                z += dz;
 
                     // Hitung laplace rate dan stabilitas
                     const laplaceRate = gradDryAdiabatic - gradEnv;
