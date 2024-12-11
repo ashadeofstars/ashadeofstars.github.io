@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How To Use - Atmosferasa</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #5f4b8b;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 20px;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #48375d;
+        }
+
+        nav a.active {
+            background-color: #6c4f9c;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #6c4f9c, #b880d0);
+            color: white;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .instructions h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .step img {
+            max-width: 150px;
+            margin-right: 20px;
+            border-radius: 8px;
+        }
+
+        .step-text {
+            text-align: left;
+        }
+
+        .step-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #5f4b8b;
+        }
+
+        .step-text p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .cta-buttons {
+            margin-top: 30px;
+        }
+
+        .cta-buttons a {
+            text-decoration: none;
+            padding: 15px 30px;
+            margin: 10px;
+            background-color: #5f4b8b;
+            color: white;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-buttons a:hover {
+            background-color: #48375d;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #5f4b8b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/UV/index.html">UV Index Checker</a>
+        <a href="/Calculator/index.html">Stability Calculator</a>
+        <a href="/How/index.html" class="active">How To Use</a>
+        <a href="/Funfact/index.html">Fun Facts</a>
+        <a href="/Profil/index.html">Profil</a>
+    </nav>
+
+    <header class="hero-section">
+        <h1>How To Use Atmosferasa Tools</h1>
+        <p>Learn how to use the Stability of Atmosphere Calculator and UV Index Checker with simple steps.</p>
+    </header>
+
+    <section class="instructions">
+        <h2>Using the Stability of Atmosphere Calculator</h2>
+        <div class="step">
+            <div class="step-text">
+                <h3>Step 1: Enter Parameters</h3>
+                <p>Input atmospheric details like temperature, pressure, and humidity.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-text">
+                <h3>Step 2: Calculate</h3>
+                <p>Click "Calculate" to get stability classifications and insights.</p>
+            </div>
+        </div>
+
+        <h2>Using the UV Index Checker</h2>
+        <div class="step">
+            <div class="step-text">
+                <h3>Step 1: Select the region</h3>
+                <p>Select your region.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-text">
+                <h3>Step 2: Submit</h3>
+                <p>Submit the data to see the UV Index results and safety tips.</p>
+            </div>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="/Calculator/index.html">Use Stability Calculator</a>
+            <a href="/UV/index.html">Check UV Index</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Atmosferasa. All rights reserved.</p>
+    </footer>
+</body>
+</html>

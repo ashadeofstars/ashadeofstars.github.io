@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Stabilitas Atmosfer - Atmosferasa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        /* Navigation */
+        nav {
+            background-color: #5f4b8b;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a.active {
+            background-color: #6c4f9c;
+        }
+
+        nav a:hover {
+            background-color: #48375d;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #6c4f9c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #48375d;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/UV/index.html">UV Index Checker</a>
+        <a href="/Calculator/index.html" class="active">Stability Calculator</a>
+        <a href="/How/index.html">How To Use</a>
+        <a href="/Funfact/index.html">Fun Facts</a>
+        <a href="/Profil/index.html">Profil</a>
+    </nav>
+
+    <div class="container">
+        <h1>Kalkulator Stabilitas Atmosfer</h1>
+        <label for="initial-temp">Temperatur Awal (°C):</label>
+        <input type="number" id="initial-temp" placeholder="Contoh: 25">
+        
+        <label for="initial-altitude">Ketinggian Awal (m):</label>
+        <input type="number" id="initial-altitude" placeholder="Contoh: 0">
+        
+        <label for="final-altitude">Ketinggian Akhir (m):</label>
+        <input type="number" id="final-altitude" placeholder="Contoh: 5000">
+        
+        <label for="step-size">Ukuran Langkah (m):</label>
+        <input type="number" id="step-size" placeholder="Contoh: 100">
+        
+        <button onclick="calculateStability()">Hitung Stabilitas</button>
+        
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        function calculateStability() {
+            const T0 = parseFloat(document.getElementById('initial-temp').value);
+            const z0 = parseFloat(document.getElementById('initial-altitude').value);
+            const zFinal = parseFloat(document.getElementById('final-altitude').value);
+            const h = parseFloat(document.getElementById('step-size').value);
+            const output = document.getElementById('output');
+            
+            try {
+                if (isNaN(T0) || isNaN(z0) || isNaN(zFinal) || isNaN(h)) {
+                    throw new Error("Semua input harus berupa angka.");
+                }
+
+                if (zFinal <= z0) {
+                    throw new Error("Ketinggian akhir harus lebih besar dari ketinggian awal.");
+                }
+
+                // Gradien suhu adiabatik kering (Gamma_d)
+                const gradDryAdiabatic = 1 / 100; // °C/m
+
+                // Metode Runge-Kutta ke-4
+                let z = z0;
+                let T = T0;
+                const results = [];
+                while (z <= zFinal) {
+                    // Gradien suhu lingkungan (contoh: model sederhana)
+                    const gradEnv = gradDryAdiabatic * (1 - Math.random() * 0.2); // Simulasi variasi
+                    const k1 = -gradEnv * h;
+                    const k2 = -gradEnv * h;
+                    const k3 = -gradEnv * h;
+                    const k4 = -gradEnv * h;
+
+                    // Update suhu
+                    T += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+                    z += h;
+
+                    // Hitung laplace rate dan stabilitas
+                    const laplaceRate = gradDryAdiabatic - gradEnv;
+                    const stability = laplaceRate > gradDryAdiabatic
+                        ? "Tidak Stabil"
+                        : laplaceRate < gradDryAdiabatic
+                        ? "Stabil"
+                        : "Netral";
+
+                    const impact = (stability === "Tidak Stabil") ? "Potensi konveksi kuat, pembentukan awan, hujan atau badai." :
+                                   (stability === "Stabil") ? "Cuaca cerah, udara stabil, polusi dapat terperangkap." :
+                                   "Cuaca tenang, tanpa hujan atau badai.";
+
+                    results.push({
+                        z: z.toFixed(2),
+                        T: T.toFixed(2),
+                        gradEnv: gradEnv.toFixed(4),
+                        laplaceRate: laplaceRate.toFixed(4),
+                        stability: stability,
+                        impact: impact
+                    });
+                }
+
+                // Tampilkan hasil
+                let resultHTML = `
+                    <h3>Hasil Perhitungan</h3>
+                    <table border="1" style="width:100%; text-align:center;">
+                        <tr>
+                            <th>Ketinggian (m)</th>
+                            <th>Temperatur (°C)</th>
+                            <th>Gradien Suhu Lingkungan (°C/m)</th>
+                            <th>Laju Laplace (°C/m)</th>
+                            <th>Stabilitas</th>
+                            <th>Dampak</th>
+                        </tr>
+                `;
+                results.forEach(row => {
+                    resultHTML += `
+                        <tr>
+                            <td>${row.z}</td>
+                            <td>${row.T}</td>
+                            <td>${row.gradEnv}</td>
+                            <td>${row.laplaceRate}</td>
+                            <td>${row.stability}</td>
+                            <td>${row.impact}</td>
+                        </tr>
+                    `;
+                });
+                resultHTML += `</table>`;
+
+                output.innerHTML = resultHTML;
+                output.classList.remove('error');
+            } catch (error) {
+                output.innerHTML = `<p class="error">${error.message}</p>`;
+                output.classList.add('error');
+            }
+        }
+    </script>
+</body>
+</html>

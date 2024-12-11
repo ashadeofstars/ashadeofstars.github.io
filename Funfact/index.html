@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts - Atmosferasa</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #5f4b8b;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a.active {
+            background-color: #6c4f9c;
+        }
+
+        nav a:hover {
+            background-color: #48375d;
+        }
+
+        /* Fun Facts Section */
+        .fun-facts {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .fun-facts h1 {
+            font-size: 3rem;
+            color: #4f5d73;
+            margin-bottom: 40px;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .fact-card {
+            background-color: #6c4f9c;
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 350px;
+            text-align: left;
+        }
+
+        .fact-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .fact-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .fact-card p {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #5f4b8b;
+            color: white;
+            margin-top: 50px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/UV/index.html">UV Index Checker</a>
+        <a href="/Calculator/index.html">Stability Calculator</a>
+        <a href="/How/index.html">How To Use</a>
+        <a href="/Funfact/index.html" class="active">Fun Facts</a>
+        <a href="/Profil/index.html">Profil</a>
+    </nav>
+
+    <!-- Fun Facts Section -->
+    <section class="fun-facts">
+        <h1>Fun Facts About The Atmosphere and Stability</h1>
+        <div class="facts-grid">
+            <!-- Fact Card 1 -->
+            <div class="fact-card">
+                <h2>Fact #1</h2>
+                <p>Stable atmospheres resist vertical motion, often leading to clear skies, while unstable atmospheres encourage vertical motion, resulting in clouds and storms.</p>
+            </div>
+            <!-- Fact Card 2 -->
+            <div class="fact-card">
+                <h2>Fact #2</h2>
+                <p>Temperature inversions create stability by trapping cooler air below warmer air, often causing fog or smog near the ground.</p>
+            </div>
+            <!-- Fact Card 3 -->
+            <div class="fact-card">
+                <h2>Fact #3</h2>
+                <p>Atmospheric stability plays a critical role in aviation, as unstable conditions can cause turbulence while stable air ensures smoother flights.</p>
+            </div>
+            <!-- Fact Card 4 -->
+            <div class="fact-card">
+                <h2>Fact #4</h2>
+                <p>The lapse rate determines stability. If the actual lapse rate exceeds the dry adiabatic lapse rate (1°C/100m), the atmosphere is considered unstable.</p>
+            </div>
+            <!-- Fact Card 5 -->
+            <div class="fact-card">
+                <h2>Fact #5</h2>
+                <p>Unstable atmospheres are necessary for thunderstorms to develop, as they allow warm, moist air to rise and form cumulonimbus clouds.</p>
+            </div>
+            <!-- Fact Card 6 -->
+            <div class="fact-card">
+                <h2>Fact #6</h2>
+                <p>Stable atmospheric conditions can trap pollutants near the ground, creating health hazards in urban areas. This is why monitoring air stability is essential for environmental safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Atmosferasa. All rights reserved.</p>
+    </footer>
+</body>
+</html>
