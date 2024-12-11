@@ -144,11 +144,10 @@
                 while (z <= zFinal) {
                     // Gradien suhu lingkungan (contoh: model sederhana)
                     const gradEnv = gradDryAdiabatic * (1 - Math.random() * 0.2); // Simulasi variasi
-                    const k1 = (T, z) * h;
-                    const k2 = (T + 0.5 * k1, z + 0.5 * h) * h;
-                    const k3 = (T + 0.5 * k2, z + 0.5 * h) * h;
-                    const k4 = (T + k3, z + h) * h;
-
+                    const k1 = -gradEnv * h;
+                    const k2 = -gradEnv * h;
+                    const k3 = -gradEnv * h;
+                    const k4 = -gradEnv * h;
 
                     // Update suhu
                     T += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
